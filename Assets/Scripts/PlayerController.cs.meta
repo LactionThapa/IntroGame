@@ -3,7 +3,9 @@ guid: d27cab5db559d864087351ed3bea3e87
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ScoreText: {fileID: 9101460285637638468, guid: ebd0d1678f83b09448f17e7eddc96f45, type: 3}
+  - WinText: {fileID: 678343200546732634, guid: 2eb4d028904063b48a72648e269a7bd2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
