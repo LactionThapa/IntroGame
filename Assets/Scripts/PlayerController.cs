@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private int numPickups = 4;
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI WinText;
+    public TextMeshProUGUI PlayerPosition;
+    public TextMeshProUGUI PlayerVelocity;
+    public Vector3 lastPosition;
 
     void OnMove(InputValue value) {
         moveValue = value.Get<Vector2>();
@@ -23,6 +26,11 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
 
         GetComponent<Rigidbody>().AddForce(movement * speed * Time.fixedDeltaTime);
+        Vector3 Velocity = (transform.position - lastPosition)/Time.fixedDeltaTime;
+        float velocity = MathF.Sqrt(Velocity.x*Velocity.x+Velocity.y*Velocity.y+Velocity.z*Velocity.z);
+        PlayerVelocity.text = velocity.ToString();
+        PlayerPosition.text = (transform.position).ToString();
+        lastPosition = transform.position;
     }
 
     void OnTriggerEnter(Collider other)
@@ -43,6 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             WinText.text = "You Win!";
         }
+
     }
 
     void Start()
@@ -50,5 +59,6 @@ public class PlayerController : MonoBehaviour
         count = 0;
         WinText.text = "";
         SetCountText();
+        lastPosition = transform.position;
     }
 }
